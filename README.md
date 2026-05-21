@@ -68,7 +68,7 @@ REDIS_PORT=6379
 ### 3. Iniciar a Aplicação (Sem Cache de Build)
 Para baixar as imagens do Postgres e Redis, instalar as dependências e compilar o TypeScript do NestJS do zero absolute, execute:
 ```bash
-docker builder prune -f && docker-compose up --build
+docker builder prune -f && docker compose up --build
 ```
 Após o carregamento, a aplicação estará disponível em `http://localhost:3000`.
 
@@ -142,10 +142,5 @@ keys *
 get clients:list
 
 # 4. Sair do terminal
-exit
-```
-
-Dessa forma, o gerenciamento do seu ecossistema ficou muito mais ágil! Gostaria de avançar agora para as **validações automáticas de dados** (`class-validator`) nos DTOs ou quer criar uma nova tabela relacionada ao cliente?
-
 exit
 ```
