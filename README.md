@@ -11,9 +11,8 @@ O projeto consiste no gerenciamento de um CRUD de **Clientes (Clients)**, otimiz
 1. **Escrita e Atualização reativas (Cache-Aside / Write-Through Híbrido):** Sempre que um cliente é criado (`POST`), atualizado (`PATCH`) ou removido (`DELETE`), a alteração é feita imediatamente no PostgreSQL. Ao mesmo tempo, o NestJS atualiza um **Array unificado de cache** (`clients:list`) dentro da memória RAM do Redis usando operações estilo *Push* ou mapeamento.
 2. **Listagem Geral (`GET /client`):** Visando dados 100% consistentes e em tempo real, a rota de listagem geral busca as informações **sempre direto do PostgreSQL**.
 3. **Leitura por ID (`GET /client/:id`):** Busca **primeiro na memória do Redis**. Se o cliente for encontrado no array em cache, a API responde instantaneamente (Performance Máxima). Caso ocorra um *Cache Miss* (não encontrado), ela recorre ao PostgreSQL.
-4. **Fluxo de Dados**
 <p align="center">
-  <img src="./cacheImg.png" alt="Fluxo de Dados NestJS com Postgres e Redis" width="800px" />
+  <img src="cacheImg.png" alt="Fluxo de Dados NestJS com Postgres e Redis" width="800px" />
 </p>
 ---
 
@@ -33,7 +32,7 @@ O projeto consiste no gerenciamento de um CRUD de **Clientes (Clients)**, otimiz
 
 ## 👨‍💻 Desenvolvedor
 
-* **Nome:** [Tiago Honorio Matos Da Silva]
+* **Nome:** Tiago Honorio Matos Da Silva
 * **E-mail:** [tiago_honorio2010@hotmail.com]
 
 ---
