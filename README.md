@@ -11,7 +11,10 @@ O projeto consiste no gerenciamento de um CRUD de **Clientes (Clients)**, otimiz
 1. **Escrita e Atualização reativas (Cache-Aside / Write-Through Híbrido):** Sempre que um cliente é criado (`POST`), atualizado (`PATCH`) ou removido (`DELETE`), a alteração é feita imediatamente no PostgreSQL. Ao mesmo tempo, o NestJS atualiza um **Array unificado de cache** (`clients:list`) dentro da memória RAM do Redis usando operações estilo *Push* ou mapeamento.
 2. **Listagem Geral (`GET /client`):** Visando dados 100% consistentes e em tempo real, a rota de listagem geral busca as informações **sempre direto do PostgreSQL**.
 3. **Leitura por ID (`GET /client/:id`):** Busca **primeiro na memória do Redis**. Se o cliente for encontrado no array em cache, a API responde instantaneamente (Performance Máxima). Caso ocorra um *Cache Miss* (não encontrado), ela recorre ao PostgreSQL.
-
+**Fluxo**
+<p align="center">
+  <img src="./cacheImg.png" alt="Fluxo de Dados NestJS com Postgres e Redis" width="800px" />
+</p>
 ---
 
 ## 🛠️ Tecnologias Utilizadas
@@ -30,8 +33,8 @@ O projeto consiste no gerenciamento de um CRUD de **Clientes (Clients)**, otimiz
 
 ## 👨‍💻 Desenvolvedor
 
-* **Nome:** [Seu Nome Aqui]
-* **E-mail:** [Seu E-mail Aqui]
+* **Nome:** [Tiago Honorio Matos Da Silva]
+* **E-mail:** [tiago_honorio2010@hotmail.com]
 
 ---
 
@@ -45,8 +48,8 @@ Você precisa ter instalado em sua máquina:
 ### 1. Clonar o Repositório
 Abra o seu terminal e execute:
 ```bash
-git clone https://github.com
-cd nome-do-seu-repositorio
+git clone https://github.com/20100000/api_cache_nest.git
+cd api_cache_nest
 ```
 
 ### 2. Configurar as Variáveis de Ambiente
@@ -98,6 +101,7 @@ Executing (default): SELECT "id", "name", "email", "phone" FROM "clients" AS "Cl
 ### ⚡ Cenário 2: Resposta Instantânea do Redis Cache
 Ao chamar a rota **`GET /client/{id}`** (Buscar por ID) de um cliente recentemente criado ou já consultado, a API não tocará no Postgres, respondendo diretamente da memória RAM:
 ```text
+⚡ [FIRST REDIS -> ] object
 ⚡ [Redis] Cliente ID 1 encontrado dentro do Array em Cache!
 ```
 
